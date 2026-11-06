@@ -2,4 +2,8 @@
 
 Sandbox repository for the dsh-superagent prototype.
 
-hello
+## 部署观察页面
+
+直接用浏览器打开 `index.html`，或在此目录运行 `python3 -m http.server 8000` 后访问 `http://localhost:8000/`。
+
+页面是人工整理的静态资料快照，并非实时新闻服务。价格、硬件配置及性能会随来源和部署条件变化，请在采购或部署前核对页面链接的原始资料。
