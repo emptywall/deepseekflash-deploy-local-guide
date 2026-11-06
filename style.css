@@ -2,3 +2,4 @@
 
 .hero{height:auto;min-height:300px}
 .source-check{padding:20px 22px;margin-bottom:20px;overflow-wrap:anywhere}.source-check p{color:#64728c;line-height:1.7}.source-check button{border:0;border-radius:8px;background:#526ee8;color:white;font:inherit;font-weight:700;padding:10px 16px;cursor:pointer}.source-check button:disabled{opacity:.6;cursor:wait}.source-check button:focus-visible{outline:3px solid #9aabff;outline-offset:3px}
+.repository-history{border-top:1px solid var(--line);margin-top:16px;padding-top:16px}.repository-history ul{padding-left:20px;margin:8px 0 0}.repository-history li{margin:8px 0;line-height:1.6}.repository-history a{color:#526ee8;text-decoration:underline}.repository-history time{display:block;color:#64728c;font-size:12px}
