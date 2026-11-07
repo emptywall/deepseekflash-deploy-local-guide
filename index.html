@@ -194,6 +194,26 @@
         <div><strong>$16k–$188.5k</strong><span>硬件门槛（参考）</span></div>
       </div>
 
+      <section class="panel pick-panel">
+        <div class="panel-header"><div><span class="mini-icon mint">◎</span><strong>怎么选：按预算 / 需求</strong></div><span class="muted-label">基于上表方案</span></div>
+        <div class="table-scroll">
+          <table class="data-table compact-table pick-table">
+            <thead><tr><th scope="col">需求</th><th scope="col">代表方案</th><th scope="col">实测速度（单流 / 批量）</th><th scope="col">参考硬件成本</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">最低成本起步</th><td>2×DGX Spark（EXL3 2.9bpw / TensorFold）</td><td>57–92 / 140 @4</td><td>≈$12k（€9.6k）</td></tr>
+              <tr><th scope="row">单卡 + 大内存、Windows</th><td>1×96GB + 253GB RAM（Strata 2.25bpw）</td><td>84 / 单会话，524K 上下文</td><td>≈$16k + 主机</td></tr>
+              <tr><th scope="row">性价比甜点</th><td>2×96GB（EXL3 3bpw，可加 CPU 运行时）</td><td>224–262 / 363–406</td><td>≈$32k</td></tr>
+              <tr><th scope="row">想跑原生权重</th><td>3×96GB（vLLM TP3，专家停主机内存）</td><td>229–265 / 808–820 @C8</td><td>≈$48k</td></tr>
+              <tr><th scope="row">原生权重 + 更大 KV / 并发</th><td>4×96GB（vLLM 原生或 Flare gb202）</td><td>200–220 / 2,282 @32</td><td>≈$64k</td></tr>
+              <tr><th scope="row">大吞吐、多用户</th><td>8×96GB（EXL3 双副本）</td><td>435–457 / 8,430 合计</td><td>≈$128k</td></tr>
+              <tr><th scope="row">低功耗集群</th><td>4×DGX Spark（SGLang 原生 MXFP4）</td><td>87.7 / 342.7 @C16</td><td>≈€19.2k</td></tr>
+              <tr><th scope="row">单机最大内存</th><td>DGX Station GB300</td><td>300–320 / prefill 40k–60k</td><td>≈$94.9k–188.5k</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="table-note">「代表速度」取表内对应方案；同一档位不同量化/上下文的差距可能比换硬件更大。预算只算加速器与参考整机，不含电费、机柜和运维。</p>
+      </section>
+
       <section class="panel table-panel">
         <div class="panel-header">
           <div><span class="mini-icon mint">▤</span><strong>按硬件档位浏览</strong></div>
