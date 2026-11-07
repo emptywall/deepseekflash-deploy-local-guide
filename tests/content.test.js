@@ -25,21 +25,23 @@ test('the page is a community local-deployment reference, not an official API in
   assert.doesNotMatch(js, /huggingface\.co\/api/);
 });
 
-test('the version section answers 0909 vs 1017 with verified weight facts', () => {
-  assert.match(html, /0909/);
+test('the page focuses on 1017 and provides RMB cost assumptions', () => {
+  assert.doesNotMatch(html, /0909/);
   assert.match(html, /1017/);
   assert.match(html, /510,296,708,312/);
-  assert.match(html, /48\/48/);
   assert.match(html, /Engram/);
-  assert.match(html, /用 1017/);
+  assert.match(html, /1 美元 = ¥7\.20/);
+  assert.match(html, /1 欧元 = ¥7\.80/);
+  assert.match(html, /¥12\.29 每百万输出 token/);
+  assert.match(html, /¥40\.98 每百万输出 token/);
 });
 
-test('the setup table has twelve tiered rows and each names a real source', () => {
-  assert.equal(rowBlocks.length, 12);
+test('the setup table has ten tiered rows and each names a real source', () => {
+  assert.equal(rowBlocks.length, 10);
   for (const tier of tiers) assert.ok(['single', 'dual', 'triple', 'quad', 'octa', 'spark', 'other'].includes(tier), `unknown tier ${tier}`);
   const body = html.match(/id="setups-table"[\s\S]*?<tbody>([\s\S]*?)<\/tbody>/)[1];
   const rowMarkup = body.split(/<tr /).slice(1);
-  assert.equal(rowMarkup.length, 12);
+  assert.equal(rowMarkup.length, 10);
   for (const row of rowMarkup) {
     assert.match(row, /href="https:\/\//, 'every setup row links to its public source');
     assert.match(row, /target="_blank"/);

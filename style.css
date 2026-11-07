@@ -412,6 +412,7 @@ footer > div:first-child p { margin: 6px 0 0; font-size: 11px; color: var(--fain
 .speed-panel .bar-track { height: 9px; }
 
 /* 版本/选型/质量表：保持可读的最小宽度，窄屏内滚动 */
+.single-stack { grid-template-columns: 1fr; }
 .version-table { min-width: 580px; }
 .pick-table { min-width: 640px; }
 .quality-panel .compact-table { min-width: 680px; }
