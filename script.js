@@ -1,79 +1,110 @@
-const links = [...document.querySelectorAll('.nav-link')];
-links.forEach(link => link.addEventListener('click', () => {
-  links.forEach(item => item.classList.remove('active'));
-  link.classList.add('active');
-}));
+'use strict';
 
-// Both requests are opt-in and report repository information, not deployment news.
-const checkButton = document.getElementById('check-updates');
-const checkStatus = document.getElementById('check-status');
-const checkResult = document.getElementById('check-result');
-const historyStatus = document.getElementById('history-status');
-const historyList = document.getElementById('history-list');
-const modelId = 'deepseek-ai/DeepSeek-V4.1-Flash-1017';
-const api = `https://huggingface.co/api/models/${modelId}`;
-const isDate = value => typeof value === 'string' && /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?Z$/.test(value) && Number.isFinite(Date.parse(value));
-const formatDate = value => new Date(value).toISOString().replace('T', ' ').replace(/\.\d{3}Z$/, ' UTC');
+/* 社区部署参考页的表格筛选与排序。
+   纯函数与 DOM 初始化分离，便于 node --test 直接测试。 */
 
-async function getJson(url) {
-  const controller = new AbortController();
-  const timer = setTimeout(() => controller.abort(), 10000);
-  try {
-    const response = await fetch(url, { signal: controller.signal, credentials: 'omit', cache: 'no-store' });
-    if (!response.ok) throw new Error('Request failed');
-    return await response.json();
-  } finally {
-    clearTimeout(timer);
-  }
+function matchesTier(rowTier, filter) {
+  return filter === 'all' || rowTier === filter;
 }
 
-async function checkMetadata() {
-  try {
-    const data = await getJson(api);
-    if (data.id !== modelId || !/^[a-f0-9]{40}$/.test(data.sha) || !isDate(data.lastModified)) throw new Error('Invalid metadata');
-    const checked = formatDate(new Date().toISOString());
-    checkResult.textContent = `仓库最后修改：${formatDate(data.lastModified)}；版本：${data.sha}。检查时间：${checked}。仓库修改不代表模型、价格或本页内容发生变化，请打开官方模型卡核实。`;
-    checkResult.hidden = false;
-    checkStatus.textContent = '仓库元数据查询成功；静态快照未改变。';
-  } catch {
-    checkStatus.textContent = '元数据查询失败或超时（可能是网络、跨域限制或服务限流）；静态快照保持不变。可稍后重试或直接查看官方模型卡。';
-  }
+function parseMetric(value) {
+  if (typeof value === 'number') return Number.isFinite(value) ? value : null;
+  const number = Number.parseFloat(value);
+  return Number.isFinite(number) ? number : null;
 }
 
-async function checkHistory() {
-  try {
-    const data = await getJson(`${api}/commits/main?limit=5`);
-    if (!Array.isArray(data)) throw new Error('Invalid history');
-    const commits = data.slice(0, 5).filter(commit => commit && typeof commit.id === 'string' && /^[a-f0-9]{40}$/.test(commit.id) && typeof commit.title === 'string' && commit.title.trim() && isDate(commit.date));
-    historyList.replaceChildren();
-    for (const commit of commits) {
-      const item = document.createElement('li');
-      const link = document.createElement('a');
-      link.href = `https://huggingface.co/${modelId}/commit/${commit.id}`;
-      link.target = '_blank';
-      link.rel = 'noopener noreferrer';
-      link.textContent = commit.title.slice(0, 300);
-      const date = document.createElement('time');
-      date.dateTime = commit.date;
-      date.textContent = formatDate(commit.date);
-      item.append(link, date);
-      historyList.append(item);
-    }
-    historyStatus.textContent = commits.length ? '最近仓库提交（最多 5 条）：' : '未找到可显示的仓库提交。';
-  } catch {
-    historyList.replaceChildren();
-    historyStatus.textContent = '仓库历史查询失败或超时，可稍后重试；不影响元数据查询。';
+function sortRows(rows, key) {
+  const copy = rows.slice();
+  if (key === 'single-desc' || key === 'batch-desc') {
+    const field = key === 'single-desc' ? 'single' : 'batch';
+    copy.sort((left, right) => {
+      const a = left[field];
+      const b = right[field];
+      if (a === null && b === null) return left.order - right.order;
+      if (a === null) return 1;
+      if (b === null) return -1;
+      if (b !== a) return b - a;
+      return left.order - right.order;
+    });
   }
+  return copy;
 }
 
-checkButton.addEventListener('click', async () => {
-  checkButton.disabled = true;
-  checkStatus.textContent = '正在查询官方模型仓库元数据…';
-  historyStatus.textContent = '正在查询仓库历史…';
-  historyList.replaceChildren();
-  try {
-    await Promise.all([checkMetadata(), checkHistory()]);
-  } finally {
-    checkButton.disabled = false;
+function readRows(table) {
+  return [...table.tBodies[0].rows].map((row, order) => ({
+    row,
+    order: Number(row.getAttribute('data-order') ?? order),
+    tier: row.getAttribute('data-tier') || '',
+    single: parseMetric(row.getAttribute('data-single')),
+    batch: parseMetric(row.getAttribute('data-batch')),
+  }));
+}
+
+function applyView(table, filter, sortKey) {
+  const rows = readRows(table);
+  let shown = 0;
+  for (const entry of rows) {
+    const visible = matchesTier(entry.tier, filter);
+    entry.row.hidden = !visible;
+    if (visible) shown += 1;
   }
-});
+  const ordered = sortRows(rows, sortKey);
+  const body = table.tBodies[0];
+  for (const entry of ordered) body.append(entry.row);
+  return shown;
+}
+
+function init() {
+  const table = document.getElementById('setups-table');
+  if (!table) return;
+  const chips = [...document.querySelectorAll('.filter-chips .chip')];
+  const sortSelect = document.getElementById('sort-select');
+  const status = document.getElementById('table-status');
+  const total = table.tBodies[0].rows.length;
+  [...table.tBodies[0].rows].forEach((row, order) => row.setAttribute('data-order', String(order)));
+  let filter = 'all';
+  let sortKey = 'default';
+
+  const render = () => {
+    const shown = applyView(table, filter, sortKey);
+    if (status) status.textContent = `显示 ${shown} / ${total} 组方案${filter === 'all' ? '' : '（已按硬件档位筛选）'}`;
+  };
+
+  for (const chip of chips) {
+    chip.addEventListener('click', () => {
+      filter = chip.getAttribute('data-filter') || 'all';
+      for (const other of chips) {
+        const active = other === chip;
+        other.classList.toggle('active', active);
+        other.setAttribute('aria-pressed', String(active));
+      }
+      render();
+    });
+  }
+
+  if (sortSelect) {
+    sortSelect.addEventListener('change', () => {
+      sortKey = sortSelect.value || 'default';
+      render();
+    });
+  }
+
+  const links = [...document.querySelectorAll('.nav-link')];
+  for (const link of links) {
+    link.addEventListener('click', () => {
+      for (const other of links) other.classList.remove('active');
+      link.classList.add('active');
+    });
+  }
+
+  render();
+}
+
+if (typeof document !== 'undefined' && typeof window !== 'undefined') {
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+  else init();
+}
+
+if (typeof module !== 'undefined' && module.exports) {
+  module.exports = { matchesTier, parseMetric, sortRows };
+}
