@@ -90,3 +90,15 @@ test('sortRows orders by metric descending with missing values last', () => {
   assert.deepEqual(sortRows(rows, 'batch-desc').map(row => row.order), [2, 1, 0, 3]);
   assert.deepEqual(rows.map(row => row.order), [0, 1, 2, 3], 'input array is not mutated');
 });
+
+test('every internal anchor resolves and every external link is https', () => {
+  const ids = new Set([...html.matchAll(/id="([^"]+)"/g)].map(match => match[1]));
+  for (const match of html.matchAll(/href="#([^"]+)"/g)) {
+    assert.ok(ids.has(match[1]), `missing anchor target #${match[1]}`);
+  }
+  for (const match of html.matchAll(/href="([^"]+)"/g)) {
+    const href = match[1];
+    assert.ok(!href.startsWith('http:') && !href.startsWith('javascript:'), `unsafe link ${href}`);
+    assert.ok(href.startsWith('https://') || href.startsWith('#') || !href.includes('://'), `unexpected link ${href}`);
+  }
+});

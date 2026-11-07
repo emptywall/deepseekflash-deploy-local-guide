@@ -410,3 +410,8 @@ footer > div:first-child p { margin: 6px 0 0; font-size: 11px; color: var(--fain
 .speed-panel .bar-row { grid-template-columns: 104px 1fr 44px; }
 .speed-panel .bar-name { font-size: 11px; color: var(--muted); }
 .speed-panel .bar-track { height: 9px; }
+
+/* 版本/选型/质量表：保持可读的最小宽度，窄屏内滚动 */
+.version-table { min-width: 580px; }
+.pick-table { min-width: 640px; }
+.quality-panel .compact-table { min-width: 680px; }
