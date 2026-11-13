@@ -435,3 +435,70 @@ footer > div:first-child p { margin: 6px 0 0; font-size: 11px; color: var(--fain
 #price-changes .flat { color: #667085; background: #f2f4f7; }
 #price-changes td small { display: block; color: var(--faint); font-size: 11px; font-weight: 500; margin-top: 2px; }
 #price-changes table td { font-variant-numeric: tabular-nums; }
+
+/* ===== DeepSeek 鲸鱼图标（官方 logo 的图形部分，内联 SVG） =====
+   三处复用同一 path：侧边栏品牌标 .brand-mark、底部 .side-orb、hero 中心 .core。
+   用 currentColor 继承各容器已有的 color，避免重复定义配色。 */
+/* 用固定 px 尺寸：百分比在 grid/绝对定位容器里可能解析为 0，实测 .core 与
+   .side-orb 的 svg 拿到 0x0。鲸鱼长宽比约 27:19.9，故 width:height ≈ 1.36。 */
+.brand-mark svg { display: block; width: 24px; height: 18px; fill: #fff; }
+.side-orb svg   { display: block; width: 30px; height: 22px; fill: currentColor; }
+/* .core 是 grid + place-items:center：子项会被 stretch 到容器尺寸，
+   所以这里必须显式给 max-* 且用 align/justify-self 覆盖 stretch。 */
+.core svg {
+  display: block;
+  width: 34px; height: 25px;
+  align-self: center; justify-self: center;
+  flex: none;
+  fill: #fff;
+}
+.brand-mark svg use,
+.side-orb svg use,
+.core svg use { fill: inherit; }
+.brand-mark { padding: 0; }
+.side-orb { display: flex; align-items: center; }
+
+/* ===== 首屏「三个最」方案卡 ===== */
+.picks { list-style: none; margin: 16px 0 0; padding: 0; display: grid; gap: 9px; }
+.picks li {
+  position: relative;
+  padding: 11px 13px 11px 12px;
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--blue);
+  border-radius: 9px;
+  background: #fff;
+  line-height: 1.6;
+}
+.picks li .pick-tag {
+  display: inline-block;
+  margin-right: 7px;
+  padding: 1px 7px;
+  border-radius: 999px;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: .04em;
+  vertical-align: 1px;
+}
+.pick-tag.cheapest { color: #067647; background: #dcfae6; }
+.pick-tag.fastest  { color: #b42318; background: #fee4e2; }
+.pick-tag.value    { color: #5b3df5; background: #efeaff; }
+.picks li strong { font-size: 13px; color: var(--ink); }
+.picks li .pick-meta {
+  display: block;
+  margin-top: 3px;
+  font-size: 11.5px;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+.picks li a {
+  display: inline-block;
+  margin-top: 5px;
+  font-size: 11.5px;
+  font-weight: 700;
+  color: #5b71d5;
+}
+.picks li a:hover { color: var(--blue); text-decoration: underline; }
+/* 左侧强调色跟随标签语义（用显式 class，不依赖 :has 兼容性） */
+.picks li.pick-cheapest { border-left-color: #12b76a; }
+.picks li.pick-fastest  { border-left-color: #f04438; }
+.picks li.pick-value    { border-left-color: #7c5cff; }

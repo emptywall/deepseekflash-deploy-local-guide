@@ -53,6 +53,26 @@ test('the setup table has tiered rows and each names a real source', () => {
   }
 });
 
+test('the DeepSeek whale mark is defined once and reused', () => {
+  // 图标用 symbol + use 复用：path 只存一份，三处引用。
+  assert.equal((html.match(/<symbol id="whale-mark"/g) || []).length, 1, 'whale symbol must be defined exactly once');
+  assert.equal((html.match(/href="#whale-mark"/g) || []).length, 3, 'brand mark, side orb and hero core each reuse it');
+  // 内联 path 会被重复计入体积，且与 symbol 版本漂移。
+  assert.doesNotMatch(html, /<svg viewBox="0 1\.7 27 19\.9"[^>]*><path/, 'no duplicated inline whale path');
+});
+
+test('the hero names the cheapest, fastest and best-value plans with sources', () => {
+  const hero = html.match(/<ul class="picks">[\s\S]*?<\/ul>/);
+  assert.ok(hero, 'hero picks list is missing');
+  for (const tag of ['最便宜', '最快', '性价比最高']) {
+    assert.ok(hero[0].includes(tag), `missing pick: ${tag}`);
+  }
+  // 每个「最」都必须能点进原始来源。
+  const links = hero[0].match(/href="https:\/\/[^"]+"/g) || [];
+  assert.equal(links.length, 3, 'each pick needs one source link');
+  for (const link of links) assert.match(link, /^href="https:\/\//);
+});
+
 test('the page carries a generated price-change table', () => {
   // 该区块由 deploy/check_prices.py 生成；测试只保证它存在且结构可解析，
   // 不锁死具体价格（价格每天可能变）。
