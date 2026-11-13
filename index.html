@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="DeepSeek V4.1 Flash 本地部署社区参考：汇总公开社区在真实硬件上的推理方案、成本与实测结果，聚焦 1017 权重。">
   <title>DeepSeek V4.1 Flash 本地部署 · 社区参考</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css?v=49d3060">
 </head>
 <body>
   <aside class="sidebar" aria-label="站点导航">
@@ -37,7 +37,7 @@
     <header class="topbar">
       <div class="breadcrumb">工作台 <span>/</span> 社区本地部署</div>
       <div class="top-right">
-        <span class="static-pill"><b></b> 静态资料快照 · 2026-11-06</span>
+        <span class="static-pill"><b></b> 静态资料快照 · 2026-11-13</span>
         <a href="#sources" aria-label="查看数据来源">来源 <span>↗</span></a>
       </div>
     </header>
@@ -56,7 +56,7 @@
         <div class="hero-copy">
           <div class="hero-kicker"><span class="spark">✳</span> COMMUNITY MEASUREMENTS <span class="hero-chip">1017 权重</span></div>
           <h2>从「能跑」到<br><em>「跑得值不值」。</em></h2>
-          <p>单卡 96GB 方案约 $16k / ¥11.52 万（另加主机），能跑到 84 tok/s；<br>4×96GB 方案约 $64k / ¥46.08 万（仅显卡），单流可到 220 tok/s；<br>把 10 组 1017 社区方案放在一张表里，方便按硬件和预算查。</p>
+          <p>单卡 96GB 方案约 $16k / ¥10.70 万（另加主机），能跑到 84 tok/s；<br>4×96GB 方案约 $64k / ¥42.78 万（仅显卡），单流可到 220 tok/s；<br>把 10 组 1017 社区方案放在一张表里，方便按硬件和预算查。</p>
           <div class="hero-links">
             <a href="#solutions">浏览社区方案 <span>↗</span></a>
             <a href="#versions">1017 部署注意点 <span>→</span></a>
@@ -128,7 +128,7 @@
         <div><strong>57–457</strong><span>单流 tok/s</span></div>
         <div><strong>110–8,430</strong><span>批量 tok/s</span></div>
         <div><strong>332–515</strong><span>权重/量化包 GB</span></div>
-        <div><strong>$12k–$128k / ¥8.64–92.16 万</strong><span>硬件门槛（参考，非完整 BOM）</span></div>
+        <div><strong>$12k–$128k / ¥8.02–85.57 万</strong><span>硬件门槛（参考，非完整 BOM）</span></div>
       </div>
 
       <section class="panel pick-panel">
@@ -137,13 +137,13 @@
           <table class="data-table compact-table pick-table">
             <thead><tr><th scope="col">需求</th><th scope="col">代表方案</th><th scope="col">实测速度（单流 / 批量）</th><th scope="col">参考硬件成本</th></tr></thead>
             <tbody>
-              <tr><th scope="row">最低成本起步</th><td>2×DGX Spark（EXL3 2.9bpw / TensorFold）</td><td>57–92 / 140 @4</td><td>≈$12k / ¥8.64 万（€9.6k / ¥7.49 万）</td></tr>
-              <tr><th scope="row">单卡 + 大内存、Windows</th><td>1×96GB + 253GB RAM（Strata 2.25bpw）</td><td>84 / 单会话，524K 上下文</td><td>≈$16k / ¥11.52 万 + 主机</td></tr>
-              <tr><th scope="row">性价比甜点</th><td>2×96GB（EXL3 3bpw，可加 CPU 运行时）</td><td>224–262 / 363–406</td><td>≈$32k / ¥23.04 万</td></tr>
-              <tr><th scope="row">3 卡部署</th><td>3×96GB（vLLM TP3，专家停主机内存，Engram 量化）</td><td>229–265 / 808–820 @C8</td><td>≈$48k / ¥34.56 万</td></tr>
-              <tr><th scope="row">原生权重 + 更大 KV / 并发</th><td>4×96GB（SGLang 原生或 Flare gb202）</td><td>200–220 / 2,282 @32</td><td>≈$64k / ¥46.08 万</td></tr>
-              <tr><th scope="row">大吞吐、多用户</th><td>8×96GB（EXL3 双副本）</td><td>435–457 / 8,430 合计</td><td>≈$128k / ¥92.16 万</td></tr>
-              <tr><th scope="row">低功耗集群</th><td>4×DGX Spark（SGLang 原生 MXFP4）</td><td>87.7 / 342.7 @C16</td><td>≈€19.2k / ¥14.98 万</td></tr>
+              <tr><th scope="row">最低成本起步</th><td>2×DGX Spark（EXL3 2.9bpw / TensorFold）</td><td>57–92 / 140 @4</td><td>≈$12k / ¥8.02 万（€9.6k / ¥7.10 万）</td></tr>
+              <tr><th scope="row">单卡 + 大内存、Windows</th><td>1×96GB + 253GB RAM（Strata 2.25bpw）</td><td>84 / 单会话，524K 上下文</td><td>≈$16k / ¥10.70 万 + 主机</td></tr>
+              <tr><th scope="row">性价比甜点</th><td>2×96GB（EXL3 3bpw，可加 CPU 运行时）</td><td>224–262 / 363–406</td><td>≈$32k / ¥21.39 万</td></tr>
+              <tr><th scope="row">3 卡部署</th><td>3×96GB（vLLM TP3，专家停主机内存，Engram 量化）</td><td>229–265 / 808–820 @C8</td><td>≈$48k / ¥32.09 万</td></tr>
+              <tr><th scope="row">原生权重 + 更大 KV / 并发</th><td>4×96GB（SGLang 原生或 Flare gb202）</td><td>200–220 / 2,282 @32</td><td>≈$64k / ¥42.78 万</td></tr>
+              <tr><th scope="row">大吞吐、多用户</th><td>8×96GB（EXL3 双副本）</td><td>435–457 / 8,430 合计</td><td>≈$128k / ¥85.57 万</td></tr>
+              <tr><th scope="row">低功耗集群</th><td>4×DGX Spark（SGLang 原生 MXFP4）</td><td>87.7 / 342.7 @C16</td><td>≈€19.2k / ¥14.21 万</td></tr>
             </tbody>
           </table>
         </div>
@@ -195,7 +195,7 @@
                 <td>1×96GB；253GB DDR5 内存</td>
                 <td>84.6（4K）<br>83.9（16K）</td>
                 <td>仅 1 slot；prefill 1,889 @16K</td>
-                <td>未公布；约 $16k / ¥11.52 万 + 主机</td>
+                <td>未公布；约 $16k / ¥10.70 万 + 主机</td>
                 <td><a href="https://github.com/Niko1221/Strata/issues/4816" target="_blank" rel="noopener noreferrer">GitHub ↗</a></td>
               </tr>
               <tr data-tier="dual" data-single="224.1" data-batch="362.9">
@@ -205,7 +205,7 @@
                 <td>2×96GB；1.07M token KV；1M 上下文</td>
                 <td>224.1（agentic）<br>172.8（code 46K）<br><small>CPU 运行时 261.8 / 210.1</small></td>
                 <td>110.4 @4 流；362.9（4×46K 合计）<br><small>CPU 运行时 406.2</small></td>
-                <td>约 815W（CPU 运行时 900W）；约 $32k / ¥23.04 万</td>
+                <td>约 815W（CPU 运行时 900W）；约 $32k / ¥21.39 万</td>
                 <td><a href="https://huggingface.co/diffbot/DeepSeek-V4.1-Flash-EXL3-3bpw-2x-RTX-PRO-6000" target="_blank" rel="noopener noreferrer">HF ↗</a></td>
               </tr>
               <tr data-tier="dual" data-single="80.8" data-batch="">
@@ -215,7 +215,7 @@
                 <td>2×96GB；48GB 主机内存；单会话 524,288 上下文</td>
                 <td>80.8（DSpark）<br>68.1（普通；TP2 42–43）</td>
                 <td>单会话；prefill 1,385 @524K</td>
-                <td>未公布；约 $32k / ¥23.04 万</td>
+                <td>未公布；约 $32k / ¥21.39 万</td>
                 <td><a href="https://lcz.me/topic/2452" target="_blank" rel="noopener noreferrer">论坛 ↗</a></td>
               </tr>
               <tr data-tier="triple" data-single="247" data-batch="814">
@@ -225,8 +225,8 @@
                 <td>约 510GB；约 101GiB/GPU；KV 最高 8.5M token（另一较慢配置）</td>
                 <td>229–265（C1）</td>
                 <td>808–820 @C8；467–494 @C4；prefill 14,455–14,986</td>
-                <td>未公布；约 $48k / ¥34.56 万</td>
-                <td><a href="https://github.com/BoxTops4Coochie/RTX-PRO-6000-TP3-Inference-Recipes" target="_blank" rel="noopener noreferrer">GitHub ↗</a></td>
+                <td>未公布；约 $48k / ¥32.09 万</td>
+                <td><a href="https://github.com/AzallazA/RTX-PRO-6000-TP3-Inference-Recipes" target="_blank" rel="noopener noreferrer">GitHub ↗</a></td>
               </tr>
               <tr data-tier="quad" data-single="211.5" data-batch="747.7">
                 <th scope="row"><strong>4×96GB · SGLang 原生</strong><small>128GB 主机内存</small></th>
@@ -235,7 +235,7 @@
                 <td>约 510GB；4.06M token KV</td>
                 <td>200.9（512 输入）<br>211.5（32K）<br>220.2（400K）</td>
                 <td>747.7 @C8 32K；prefill 7,439 @32K</td>
-                <td>未公布；约 $64k / ¥46.08 万</td>
+                <td>未公布；约 $64k / ¥42.78 万</td>
                 <td><a href="https://github.com/sybil-solutions/deepseek-v4.1-flash-4x-rtx-pro-6000" target="_blank" rel="noopener noreferrer">GitHub ↗</a></td>
               </tr>
               <tr data-tier="quad" data-single="103.35" data-batch="287.22">
@@ -245,7 +245,7 @@
                 <td>4×96GB；409.6K 上下文；最多 8 并发</td>
                 <td>103.35（1K→2K）</td>
                 <td>287.22 @8</td>
-                <td>未公布；约 $64k / ¥46.08 万</td>
+                <td>未公布；约 $64k / ¥42.78 万</td>
                 <td><a href="https://lcz.me/topic/2405" target="_blank" rel="noopener noreferrer">论坛 ↗</a></td>
               </tr>
               <tr data-tier="quad" data-single="" data-batch="2282">
@@ -255,7 +255,7 @@
                 <td>4×96GB 显存；77GiB 内存（Engram 磁盘）或 ≥320GiB（内存）；17.0M token KV</td>
                 <td>—（长生成 124 步/秒）</td>
                 <td>2,282 @32；Engram 入内存 2,540</td>
-                <td>未公布；约 $64k / ¥46.08 万</td>
+                <td>未公布；约 $64k / ¥42.78 万</td>
                 <td><a href="https://huggingface.co/local-inference-lab/DeepSeek-V4.1-Flash-1017-FLARE/blob/gb202/README.md" target="_blank" rel="noopener noreferrer">HF ↗</a></td>
               </tr>
               <tr data-tier="octa" data-single="446" data-batch="8430">
@@ -265,7 +265,7 @@
                 <td>每副本 4.54M token KV / 128 序列</td>
                 <td>435–457（code）</td>
                 <td>4,404–4,469/副本；整机 8,430；长生成 5,250</td>
-                <td>8 卡实测 1.1–2.4kW 参考；约 $128k / ¥92.16 万</td>
+                <td>8 卡实测 1.1–2.4kW 参考；约 $128k / ¥85.57 万</td>
                 <td><a href="https://huggingface.co/diffbot/DeepSeek-V4.1-Flash-EXL3-3bpw-2x-RTX-PRO-6000/blob/main/docs/SPEED.md" target="_blank" rel="noopener noreferrer">HF ↗</a></td>
               </tr>
               <tr data-tier="spark" data-single="57" data-batch="140">
@@ -275,7 +275,7 @@
                 <td>约 100GB 空闲内存/台；约 500GB 磁盘/台；1M 上下文</td>
                 <td>56.8（prose）<br>92.2（code）</td>
                 <td>140 @4 并发（code 合计）</td>
-                <td>2×240W；€9.6k / ¥7.49 万</td>
+                <td>2×240W；€9.6k / ¥7.10 万</td>
                 <td><a href="https://huggingface.co/Elevatormusic/DeepSeek-V4.1-Flash-1017-2x-DGX-Spark-TensorFold-2x-Faster" target="_blank" rel="noopener noreferrer">HF ↗</a></td>
               </tr>
               <tr data-tier="spark" data-single="88" data-batch="343">
@@ -285,7 +285,7 @@
                 <td>约 305GiB 常驻；每台约 6GB 空闲；1,011,084-token needle 通过</td>
                 <td>87.7（C1）</td>
                 <td>342.7 @C16；prefill 4,059–5,394</td>
-                <td>4×240W ≈ 960W；€19.2k / ¥14.98 万</td>
+                <td>4×240W ≈ 960W；€19.2k / ¥14.21 万</td>
                 <td><a href="https://github.com/MiaAI-Lab/DeepSeek-v4.1-Flash-DGX-Sparks" target="_blank" rel="noopener noreferrer">GitHub ↗</a></td>
               </tr>
             </tbody>
@@ -359,6 +359,7 @@
             <li><strong>Flare gb202 是 TP4 专属包。</strong>4 卡是硬要求；跨两个 PCIe switch 曾触发 120 秒启动超时。</li>
             <li><strong>CSF 量化包在 Spark 上慢 5–20%。</strong>省空间不等于免费。</li>
             <li><strong>DGX Spark 散热与坏卡。</strong>社区报告约 88°C、限频到 2.2GHz 可降到 80°C；8 台里有 1 台内存报错的案例。</li>
+            <li><strong>12V-2x6 供电接口有熔化报告。</strong>RTX PRO 6000 用户在限功耗 500W 下仍报告接口接近熔化；Tom's Hardware 指出该连接器问题仍在持续。多卡整机务必核对供电线材与单路负载。<span class="muted-label">（2026-11-10 社区日报）</span></li>
           </ul>
         </section>
       </div>
@@ -393,7 +394,7 @@
         <div>
           <div class="section-kicker">COST REFERENCE <span> / 06</span></div>
           <h2>成本参考 <span>Hardware, power, break-even</span></h2>
-          <p>先看硬件价格，再算利用率。人民币为示例换算：1 美元 = ¥7.20，1 欧元 = ¥7.80；非实时汇率或国内报价，采购请重新询价。</p>
+          <p>先看硬件价格，再算利用率。人民币为示例换算：<strong>1 美元 = ¥6.69，1 欧元 = ¥7.40</strong>（2026-11-13 查得，此前版本用 ¥7.20 / ¥7.80）；非实时汇率或国内报价，采购请重新询价。</p>
         </div>
       </div>
 
@@ -404,12 +405,12 @@
             <table class="data-table compact-table">
               <thead><tr><th scope="col">硬件</th><th scope="col">参考价</th><th scope="col">说明</th></tr></thead>
               <tbody>
-                <tr><th scope="row">RTX PRO 6000 Blackwell 96GB</th><td>$16,000 / ¥115,200 每卡</td><td>2026-08 官方价；早期约 $8,565；CDW 最高 $19,999；中国约 $16.5k / ¥117,600</td></tr>
-                <tr><th scope="row">RTX PRO 6000 Max-Q 250W 96GB</th><td>约 ¥76,899/卡</td><td>中国渠道 2026-04 量级（≈$10.8k）；社区多数小机箱方案用这个 SKU</td></tr>
-                <tr><th scope="row">DGX Spark 128GB</th><td>约 $6,000 / ¥43,200 每台</td><td>2026-10 报道；4× 约 $24k（欧洲社区价 €4,800/台 → €19.2k）</td></tr>
-                <tr><th scope="row">DGX Spark 64GB</th><td>$4,999 / ¥35,993 每台</td><td>2026-10 起 OEM 版；<strong>内存不够跑本页的 2×/4× Spark 方案</strong></td></tr>
-                <tr><th scope="row">2×96GB 整机</th><td>约 $32k / ¥23.04 万 卡 + 主机</td><td>按 $16k/卡；3× 约 $48k / ¥34.56 万，4× 约 $64k / ¥46.08 万 卡价</td></tr>
-                <tr><th scope="row">4×96GB 整机 BOM</th><td>约 $76.2k / ¥54.86 万</td><td>含 TR PRO 主机、256GB 内存、4TB NVMe；若按中国 4 月 Max-Q 价约 $55.5k</td></tr>
+                <tr><th scope="row">RTX PRO 6000 Blackwell 96GB</th><td>$16,000 / ¥106,960 每卡</td><td>2026-08 官方价；早期约 $8,565；CDW 最高 $19,999；<strong>2026-10-29 中国零售约 $16.5k / ¥11.02 万，戴尔整机（含卡、低配）约 $13.4k / ¥8.96 万</strong></td></tr>
+                <tr><th scope="row">RTX PRO 6000 Max-Q 250W 96GB</th><td>约 ¥71,290/卡</td><td>中国渠道 2026-04 量级（≈$10.8k，按新汇率折算）；社区多数小机箱方案用这个 SKU</td></tr>
+                <tr><th scope="row">DGX Spark 128GB</th><td>约 $6,000 / ¥40,110 每台</td><td>2026-10 报道；4× 约 $24k / ¥16.04 万（欧洲社区价 €4,800/台 → €19.2k / ¥14.21 万）</td></tr>
+                <tr><th scope="row">DGX Spark 64GB</th><td>$4,999 / ¥33,418 每台</td><td>2026-10 起 OEM 版；<strong>内存不够跑本页的 2×/4× Spark 方案</strong></td></tr>
+                <tr><th scope="row">2×96GB 整机</th><td>约 $32k / ¥21.39 万 卡 + 主机</td><td>按 $16k/卡；3× 约 $48k / ¥32.09 万，4× 约 $64k / ¥42.78 万 卡价</td></tr>
+                <tr><th scope="row">4×96GB 整机 BOM</th><td>约 $76.2k / ¥50.94 万</td><td>含 TR PRO 主机、256GB 内存、4TB NVMe；若按中国 4 月 Max-Q 价约 $55.5k / ¥37.1 万</td></tr>
                 <tr><th scope="row">租用对照（非本地）</th><td>$1.48–2.49 / ¥10.66–17.93 每 GPU·小时</td><td>RTX PRO 6000 96GB（Nebius/Hyperstack/RunPod，2026-11）；4 卡 24/7 约 $4,322–7,271/月</td></tr>
               </tbody>
             </table>
@@ -423,10 +424,10 @@
             <table class="data-table compact-table">
               <thead><tr><th scope="col">方案</th><th scope="col">功耗</th><th scope="col">8h/天电费（US）</th></tr></thead>
               <tbody>
-                <tr><th scope="row">2×96GB EXL3（实测）</th><td>约 815–900W</td><td>约 $1.2–1.3 / ¥8.64–9.36 每天</td></tr>
+                <tr><th scope="row">2×96GB EXL3（实测）</th><td>约 815–900W</td><td>约 $1.2–1.3 / ¥8.02–8.69 每天</td></tr>
                 <tr><th scope="row">4×96GB Max-Q（社区量级）</th><td>约 1.4kW</td><td>约 $2.0 / ¥14.40 每天</td></tr>
                 <tr><th scope="row">4×DGX Spark（电源上限）</th><td>≤960W</td><td>约 $1.4 / ¥10.08 每天</td></tr>
-                <tr><th scope="row">8×96GB（实测区间）</th><td>1.1–2.4kW</td><td>约 $1.6–3.4 / ¥11.52–24.48 每天</td></tr>
+                <tr><th scope="row">8×96GB（实测区间）</th><td>1.1–2.4kW</td><td>约 $1.6–3.4 / ¥10.70–22.73 每天</td></tr>
               </tbody>
             </table>
           </div>
@@ -438,7 +439,7 @@
         <div class="panel-header"><div><span class="mini-icon purple">≈</span><strong>1017 每百万输出 token 的成本示例</strong></div><span class="muted-label">美元和人民币估算，非实测报价</span></div>
         <p>按上表 4×96GB SGLang 的 1017 实测 C8 吞吐 747.7 token/s 估算；示例整机价格按 $76,200（约 ¥548,640）折旧 24 个月、每月 730 小时；该报价及下述功耗假设并非该实测机器的实际账单。假设设备全天开启，以美国电价 $0.1765/kWh、功耗 1.4kW 计算电费，未含运维、网络、税费、输入 token 或资金成本。</p>
         <div class="formula">设备折旧：$76,200 ÷ 24 ÷ 730 ≈ <b>$4.35 / ¥31.32 每小时</b><br>电费：1.4kW × $0.1765 ≈ <b>$0.25 / ¥1.78 每小时</b><br>满载产量：747.7 × 3,600 ≈ <b>269 万 token / 小时</b></div>
-        <p>100% 持续利用率：约 <strong>$1.71 / ¥12.29 每百万输出 token</strong>；30% 利用率（仍全天开机）：约 <strong>$5.69 / ¥40.98 每百万输出 token</strong>。人民币按上方示例汇率换算，实际国内电价和硬件报价应另行计算。</p>
+        <p>100% 持续利用率：约 <strong>$1.71 / ¥11.43 每百万输出 token</strong>；30% 利用率（仍全天开机）：约 <strong>$5.69 / ¥38.04 每百万输出 token</strong>。人民币按上方示例汇率换算，实际国内电价和硬件报价应另行计算。</p>
       </section>
 
       <div class="section-row" id="about">
@@ -467,21 +468,21 @@
           <a href="https://huggingface.co/local-inference-lab/DeepSeek-V4.1-Flash-1017-FLARE" target="_blank" rel="noopener noreferrer">Flare 4×96GB / 4×Spark 包 ↗</a>
           <a href="https://huggingface.co/diffbot/DeepSeek-V4.1-Flash-EXL3-3bpw-2x-RTX-PRO-6000" target="_blank" rel="noopener noreferrer">2×96GB EXL3 3bpw ↗</a>
           <a href="https://github.com/sybil-solutions/deepseek-v4.1-flash-4x-rtx-pro-6000" target="_blank" rel="noopener noreferrer">4×96GB SGLang 原生 ↗</a>
-          <a href="https://github.com/BoxTops4Coochie/RTX-PRO-6000-TP3-Inference-Recipes" target="_blank" rel="noopener noreferrer">3×96GB TP3 ↗</a>
+          <a href="https://github.com/AzallazA/RTX-PRO-6000-TP3-Inference-Recipes" target="_blank" rel="noopener noreferrer">3×96GB TP3 ↗</a>
           <a href="https://github.com/MiaAI-Lab/DeepSeek-v4.1-Flash-DGX-Sparks" target="_blank" rel="noopener noreferrer">4×Spark SGLang ↗</a>
           <a href="https://lcz.me/topic/2405" target="_blank" rel="noopener noreferrer">4×96GB 1017 实测 ↗</a>
           <a href="https://lcz.me/topic/2452" target="_blank" rel="noopener noreferrer">2×96GB Strata ↗</a>
           <a href="https://github.com/Niko1221/Strata/issues/4816" target="_blank" rel="noopener noreferrer">1×96GB Strata ↗</a>
           <a href="https://huggingface.co/api/models/deepseek-ai/DeepSeek-V4.1-Flash-1017?blobs=true" target="_blank" rel="noopener noreferrer">HF API 权重清单 ↗</a>
-          <a href="https://github.com/local-inference-lab/rtx6kpro/tree/main/daily-summaries" target="_blank" rel="noopener noreferrer">社区日报 ↗</a>
+          <a href="https://github.com/local-inference-lab/rtx6kpro/tree/master/daily-summaries" target="_blank" rel="noopener noreferrer">社区日报 ↗</a>
           <a href="https://www.nexus-compute.com/blog/dgx-station-gb300-vs-dgx-spark" target="_blank" rel="noopener noreferrer">DGX 价格参考 ↗</a>
           <a href="https://m.ithome.com/html/988947.htm" target="_blank" rel="noopener noreferrer">RTX PRO 6000 涨价 ↗</a>
           <a href="https://news.17173.com/content/10292026/190054775.shtml" target="_blank" rel="noopener noreferrer">显卡/整机价格倒挂 ↗</a>
-          <p>资料核对于 2026-11-06；权重与来源以原始页面为准。页面为手动整理，不提供实时行情或部署服务。</p>
+          <p>资料核对于 <strong>2026-11-13</strong>（上一版为 2026-11-06）。本次复核：权重清单与 HF 一致（48 分片 / 510,296,708,312 B，仓库 lastModified 2026-11-10）；汇率由 ¥7.20 更新为 ¥6.69（实测 2026-11-13）；来源链接修复 2 处（社区日报分支 404、TP3 仓库改名）。权重与来源以原始页面为准；页面为手动整理，不提供实时行情或部署服务。</p>
         </div>
       </footer>
     </div>
   </main>
-  <script src="script.js"></script>
+  <script src="script.js?v=49d3060"></script>
 </body>
 </html>

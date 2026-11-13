@@ -30,10 +30,12 @@ test('the page focuses on 1017 and provides RMB cost assumptions', () => {
   assert.match(html, /1017/);
   assert.match(html, /510,296,708,312/);
   assert.match(html, /Engram/);
-  assert.match(html, /1 美元 = ¥7\.20/);
-  assert.match(html, /1 欧元 = ¥7\.80/);
-  assert.match(html, /¥12\.29 每百万输出 token/);
-  assert.match(html, /¥40\.98 每百万输出 token/);
+  // 汇率与人民币金额随快照更新；这里只锁定「明确写出示例汇率」这一承诺，
+  // 不锁定具体数值，避免每次复核汇率都要改测试。
+  assert.match(html, /1 美元 = ¥\d+\.\d+/);
+  assert.match(html, /1 欧元 = ¥\d+\.\d+/);
+  assert.match(html, /¥\d+\.\d+ 每百万输出 token/);
+  assert.match(html, /非实时汇率|示例汇率|非实时/);
 });
 
 test('the setup table has ten tiered rows and each names a real source', () => {
@@ -58,7 +60,8 @@ test('the page has no runtime network or third-party script dependencies', () =>
   assert.doesNotMatch(html, /<script[^>]+src="https?:/);
   assert.doesNotMatch(html, /<link[^>]+href="https?:/);
   assert.doesNotMatch(js, /fetch\(|XMLHttpRequest/);
-  assert.match(html, /<script src="script.js"><\/script>/);
+  // 允许 ?v=<hash> 之类的缓存参数：页面用它强制刷新，不影响「无网络依赖」这一承诺。
+  assert.match(html, /<script src="script\.js(\?v=[A-Za-z0-9]+)?"><\/script>/);
 });
 
 test('the stylesheet keeps the responsive table and chart layout', () => {
