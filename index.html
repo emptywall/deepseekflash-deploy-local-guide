@@ -3,9 +3,45 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="DeepSeek V4.1 Flash 本地部署社区参考：汇总公开社区在真实硬件上的推理方案、成本与实测结果，聚焦 1017 权重。">
-  <title>DeepSeek V4.1 Flash 本地部署 · 社区参考</title>
+  <title>DeepSeek V4.1 Flash 1017 本地部署：12 组社区方案、成本与实测对比</title>
+  <meta name="description" content="DeepSeek V4.1 Flash（1017 权重）本地部署参考：汇总 12 组社区实测方案，含 RTX PRO 6000 1×/2×/4×/8×、DGX Spark、Apple Silicon 双机路线，附吞吐 tok/s、功耗、成本与原始来源。">
+  <meta name="keywords" content="DeepSeek V4.1 Flash,DeepSeek 本地部署,1017 权重,RTX PRO 6000,DGX Spark,Mac Studio 本地推理,LLM 本地部署,量化 EXL3,FP8,SGLang,vLLM,MLX">
+  <meta name="author" content="community index">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <link rel="canonical" href="https://emptywall.github.io/deepseekflash-deploy-local-guide/">
+
+  <!-- Open Graph（社交分享与部分搜索引擎） -->
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="DeepSeek V4.1 Flash 本地部署参考">
+  <meta property="og:title" content="DeepSeek V4.1 Flash 1017 本地部署：12 组社区方案与实测成本">
+  <meta property="og:description" content="12 组社区实测方案：RTX PRO 6000、DGX Spark、Mac Studio，含吞吐、功耗、成本、来源。官方权重为 FP8 量化。">
+  <meta property="og:url" content="https://emptywall.github.io/deepseekflash-deploy-local-guide/">
+  <meta property="og:locale" content="zh_CN">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="DeepSeek V4.1 Flash 1017 本地部署：12 组社区方案与实测成本">
+  <meta name="twitter:description" content="12 组社区实测方案：吞吐 tok/s、功耗、成本、原始来源。含 Apple Silicon 与 DGX Spark 路线。">
+
   <link rel="stylesheet" href="style.css?v=49d3060">
+
+  <!-- 结构化数据：帮助搜索引擎理解这是技术参考文章 -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "DeepSeek V4.1 Flash 1017 本地部署：社区方案、成本与实测对比",
+    "description": "汇总 12 组公开社区方案，含硬件配置、量化方式、实测吞吐、功耗与成本，每项标注原始来源。",
+    "inLanguage": "zh-CN",
+    "url": "https://emptywall.github.io/deepseekflash-deploy-local-guide/",
+    "about": [
+      { "@type": "SoftwareApplication", "name": "DeepSeek V4.1 Flash", "applicationCategory": "AI Model" },
+      { "@type": "Thing", "name": "本地大模型推理部署" }
+    ],
+    "keywords": "DeepSeek V4.1 Flash, 1017 权重, 本地部署, RTX PRO 6000, DGX Spark, Mac Studio, MLX, SGLang, vLLM, 量化",
+    "isAccessibleForFree": true
+  }
+  </script>
 </head>
 <body>
   <svg class="whale-defs" width="0" height="0" aria-hidden="true" focusable="false" style="position:absolute">

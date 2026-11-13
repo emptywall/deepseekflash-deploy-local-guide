@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://emptywall.github.io/deepseekflash-deploy-local-guide/sitemap.xml

@@ -136,7 +136,10 @@ test('filter chips cover every hardware tier used by the table', () => {
 
 test('the page has no runtime network or third-party script dependencies', () => {
   assert.doesNotMatch(html, /<script[^>]+src="https?:/);
-  assert.doesNotMatch(html, /<link[^>]+href="https?:/);
+  // rel=canonical 指向本站自身，是 SEO 元数据而非外部资源依赖，需排除。
+  const externalLinks = html.match(/<link[^>]+href="https?:[^>]*>/g) || [];
+  const nonCanonical = externalLinks.filter(tag => !/rel="canonical"/.test(tag));
+  assert.deepEqual(nonCanonical, [], 'no external stylesheet/preload dependencies');
   assert.doesNotMatch(js, /fetch\(|XMLHttpRequest/);
   // 允许 ?v=<hash> 之类的缓存参数：页面用它强制刷新，不影响「无网络依赖」这一承诺。
   assert.match(html, /<script src="script\.js(\?v=[A-Za-z0-9]+)?"><\/script>/);
