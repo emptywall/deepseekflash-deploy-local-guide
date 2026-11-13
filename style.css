@@ -522,3 +522,8 @@ footer > div:first-child p { margin: 6px 0 0; font-size: 11px; color: var(--fain
 }
 .footer-notes p:last-child { margin-bottom: 0; }
 .footer-notes strong { color: #6b7789; }
+
+/* ===== 硬件价格表跨满整行 =====
+   .cost-grid 是两列网格，这张表有 7 列数据，挤在半列里会横向截断。
+   注意：@media(max-width:1024px) 已把 cost-grid 改为单列，此处只影响宽屏。 */
+.cost-grid > .full-width { grid-column: 1 / -1; }
