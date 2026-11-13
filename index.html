@@ -213,84 +213,92 @@
               </tr>
             </thead>
             <tbody>
-              <tr data-tier="single" data-single="84.6" data-batch="">
+              <tr data-tier="single" data-single="84.6" data-batch="" data-price-basis="rtx_pro_6000_ws96_cn" data-cost-note="1×96GB 裸卡，另加主机" data-card-count="1">
                 <th scope="row"><strong>1×96GB · Strata</strong><small>2.25bpw，Windows</small></th>
                 <td>1× RTX PRO 6000 96GB；Ryzen 9 9950X3D；253GB DDR5；Windows 11</td>
                 <td>Strata 0.2.9 + IST-DAS 2.25bpw + Engram + DSpark；524,288 上下文，1 slot</td>
                 <td>1×96GB；253GB DDR5 内存</td>
                 <td>84.6（4K）<br>83.9（16K）</td>
                 <td>仅 1 slot；prefill 1,889 @16K</td>
-                <td>未公布；约 $16k / ¥10.70 万 + 主机</td>
+                <td>¥135,500（1×¥135,500/卡，2026-09-24）；1×96GB 裸卡，另加主机</td>
+              
                 <td><a href="https://github.com/Niko1221/Strata/issues/4816" target="_blank" rel="noopener noreferrer">GitHub ↗</a></td>
               </tr>
-              <tr data-tier="dual" data-single="224.1" data-batch="362.9">
+              <tr data-tier="dual" data-single="224.1" data-batch="362.9" data-price-basis="rtx_pro_6000_ws96_cn" data-cost-note="2×96GB 裸卡，另加主机" data-card-count="2">
                 <th scope="row"><strong>2×96GB · EXL3 3bpw</strong><small>GPU-only / CPU 运行时</small></th>
                 <td>2× RTX PRO 6000 96GB（300W 上限）；约 260GiB 主机内存</td>
                 <td>vLLM + 校准 EXL3 3-bit 专家；332GB 包，1/3 专家放主机内存；可选 CPU 运行时</td>
                 <td>2×96GB；1.07M token KV；1M 上下文</td>
                 <td>224.1（agentic）<br>172.8（code 46K）<br><small>CPU 运行时 261.8 / 210.1</small></td>
                 <td>110.4 @4 流；362.9（4×46K 合计）<br><small>CPU 运行时 406.2</small></td>
-                <td>约 815W（CPU 运行时 900W）；约 $32k / ¥21.39 万</td>
+                <td>¥271,000（2×¥135,500/卡，2026-09-24）；2×96GB 裸卡，另加主机</td>
+              
                 <td><a href="https://huggingface.co/diffbot/DeepSeek-V4.1-Flash-EXL3-3bpw-2x-RTX-PRO-6000" target="_blank" rel="noopener noreferrer">HF ↗</a></td>
               </tr>
-              <tr data-tier="dual" data-single="80.8" data-batch="">
+              <tr data-tier="dual" data-single="80.8" data-batch="" data-price-basis="rtx_pro_6000_ws96_cn" data-cost-note="2×96GB 裸卡，另加主机" data-card-count="2">
                 <th scope="row"><strong>2×96GB + 48GB RAM · Strata</strong><small>低成本主机</small></th>
                 <td>Ryzen 7 9700X；48GB DDR5；2×96GB（300W，PCIe 5.0 ×8）</td>
                 <td>Strata + EXL3 2.7bpw；layer split 18/22 + DSpark；Engram 走 NVMe</td>
                 <td>2×96GB；48GB 主机内存；单会话 524,288 上下文</td>
                 <td>80.8（DSpark）<br>68.1（普通；TP2 42–43）</td>
                 <td>单会话；prefill 1,385 @524K</td>
-                <td>未公布；约 $32k / ¥21.39 万</td>
+                <td>¥271,000（2×¥135,500/卡，2026-09-24）；2×96GB 裸卡，另加主机</td>
+              
                 <td><a href="https://lcz.me/topic/2452" target="_blank" rel="noopener noreferrer">论坛 ↗</a></td>
               </tr>
-              <tr data-tier="triple" data-single="247" data-batch="814">
+              <tr data-tier="triple" data-single="247" data-batch="814" data-price-basis="rtx_pro_6000_ws96_cn" data-cost-note="3×96GB 裸卡，另加主机" data-card-count="3">
                 <th scope="row"><strong>3×96GB · vLLM TP3</strong><small>4-bit Engram</small></th>
                 <td>3× RTX PRO 6000 96GB @350W；256GB 主机内存</td>
                 <td>karmic-kraken vLLM TP3 fork；FP8/MXFP4 + 4-bit Engram；约 20–33 层专家停主机内存；1M 上下文</td>
                 <td>约 510GB；约 101GiB/GPU；KV 最高 8.5M token（另一较慢配置）</td>
                 <td>229–265（C1）</td>
                 <td>808–820 @C8；467–494 @C4；prefill 14,455–14,986</td>
-                <td>未公布；约 $48k / ¥32.09 万</td>
+                <td>¥406,500（3×¥135,500/卡，2026-09-24）；3×96GB 裸卡，另加主机</td>
+              
                 <td><a href="https://github.com/AzallazA/RTX-PRO-6000-TP3-Inference-Recipes" target="_blank" rel="noopener noreferrer">GitHub ↗</a></td>
               </tr>
-              <tr data-tier="quad" data-single="211.5" data-batch="747.7">
+              <tr data-tier="quad" data-single="211.5" data-batch="747.7" data-price-basis="rtx_pro_6000_ws96_cn" data-cost-note="4×96GB 裸卡，另加主机" data-card-count="4">
                 <th scope="row"><strong>4×96GB · SGLang 原生</strong><small>128GB 主机内存</small></th>
                 <td>4× RTX PRO 6000 96GB；128GB DDR5；本地 NVMe</td>
                 <td>SGLang TP4/EP4 原生 FP4/FP8 + DSpark5；Engram 在 NVMe + 64GiB 行缓存；8 slots</td>
                 <td>约 510GB；4.06M token KV</td>
                 <td>200.9（512 输入）<br>211.5（32K）<br>220.2（400K）</td>
                 <td>747.7 @C8 32K；prefill 7,439 @32K</td>
-                <td>未公布；约 $64k / ¥42.78 万</td>
+                <td>¥542,000（4×¥135,500/卡，2026-09-24）；4×96GB 裸卡，另加主机</td>
+              
                 <td><a href="https://github.com/sybil-solutions/deepseek-v4.1-flash-4x-rtx-pro-6000" target="_blank" rel="noopener noreferrer">GitHub ↗</a></td>
               </tr>
-              <tr data-tier="quad" data-single="103.35" data-batch="287.22">
+              <tr data-tier="quad" data-single="103.35" data-batch="287.22" data-price-basis="rtx_pro_6000_ws96_cn" data-cost-note="4×96GB 裸卡，另加主机" data-card-count="4">
                 <th scope="row"><strong>4×96GB · SGLang 官方 FP4</strong><small>1017</small></th>
                 <td>4× RTX PRO 6000 Max-Q 96GB（250W）；TR 9975WX；256GB DDR5</td>
                 <td>SGLang TP4/EP4 + DSpark 5；官方 FP4/FP8 ~510GB；NVMe Engram 64GiB 缓存</td>
                 <td>4×96GB；409.6K 上下文；最多 8 并发</td>
                 <td>103.35（1K→2K）</td>
                 <td>287.22 @8</td>
-                <td>未公布；约 $64k / ¥42.78 万</td>
+                <td>¥542,000（4×¥135,500/卡，2026-09-24）；4×96GB 裸卡，另加主机</td>
+              
                 <td><a href="https://lcz.me/topic/2405" target="_blank" rel="noopener noreferrer">论坛 ↗</a></td>
               </tr>
-              <tr data-tier="quad" data-single="" data-batch="2282">
+              <tr data-tier="quad" data-single="" data-batch="2282" data-price-basis="rtx_pro_6000_ws96_cn" data-cost-note="4×96GB 裸卡，另加主机" data-card-count="4">
                 <th scope="row"><strong>4×96GB · Flare</strong><small>gb202 签名包</small></th>
                 <td>4× RTX PRO 6000 96GB（SM120），单机 PCIe</td>
                 <td>Flare 原生 Rust 运行时；MXFP4 专家，BF16 注意力，FP8 KV；约 515GB 包</td>
                 <td>4×96GB 显存；77GiB 内存（Engram 磁盘）或 ≥320GiB（内存）；17.0M token KV</td>
                 <td>—（长生成 124 步/秒）</td>
                 <td>2,282 @32；Engram 入内存 2,540</td>
-                <td>未公布；约 $64k / ¥42.78 万</td>
+                <td>¥542,000（4×¥135,500/卡，2026-09-24）；4×96GB 裸卡，另加主机</td>
+              
                 <td><a href="https://huggingface.co/local-inference-lab/DeepSeek-V4.1-Flash-1017-FLARE/blob/gb202/README.md" target="_blank" rel="noopener noreferrer">HF ↗</a></td>
               </tr>
-              <tr data-tier="octa" data-single="446" data-batch="8430">
+              <tr data-tier="octa" data-single="446" data-batch="8430" data-price-basis="rtx_pro_6000_ws96_cn" data-cost-note="8×96GB 裸卡；另加主机" data-card-count="8">
                 <th scope="row"><strong>8×96GB · EXL3 双副本</strong><small>TP4 + EP4 ×2</small></th>
                 <td>8× RTX PRO 6000 96GB，双 NUMA 节点</td>
                 <td>vLLM + EXL3 3bpw；DSpark k=7；两台 4 卡副本</td>
                 <td>每副本 4.54M token KV / 128 序列</td>
                 <td>435–457（code）</td>
                 <td>4,404–4,469/副本；整机 8,430；长生成 5,250</td>
-                <td>8 卡实测 1.1–2.4kW 参考；约 $128k / ¥85.57 万</td>
+                <td>¥1,084,000（8×¥135,500/卡，2026-09-24）；8×96GB 裸卡；另加主机</td>
+              
                 <td><a href="https://huggingface.co/diffbot/DeepSeek-V4.1-Flash-EXL3-3bpw-2x-RTX-PRO-6000/blob/main/docs/SPEED.md" target="_blank" rel="noopener noreferrer">HF ↗</a></td>
               </tr>
               <tr data-tier="spark" data-single="57" data-batch="140">
@@ -445,21 +453,27 @@
 
       <div class="cost-grid">
         <section class="panel">
-          <div class="panel-header"><div><span class="mini-icon mint">◫</span><strong>硬件价格（2026 年）</strong></div><span class="muted-label">行情波动大</span></div>
+          <!-- HARDWARE-PRICES:BEGIN (generated by render_prices.py; do not edit by hand) -->
+          <div class="panel-header"><div><span class="mini-icon mint">◫</span><strong>硬件价格（自动更新）</strong></div><span class="muted-label">来源与日期随行标注</span></div>
           <div class="table-scroll">
             <table class="data-table compact-table">
-              <thead><tr><th scope="col">硬件</th><th scope="col">参考价</th><th scope="col">说明</th></tr></thead>
+              <thead><tr><th scope="col">硬件</th><th scope="col">参考价</th><th scope="col">来源 / 说明</th></tr></thead>
               <tbody>
-                <tr><th scope="row">RTX PRO 6000 Blackwell 96GB</th><td>$16,000 / ¥106,960 每卡</td><td>2026-08 官方价；早期约 $8,565；CDW 最高 $19,999；<strong>2026-10-29 中国零售约 $16.5k / ¥11.02 万，戴尔整机（含卡、低配）约 $13.4k / ¥8.96 万</strong></td></tr>
-                <tr><th scope="row">RTX PRO 6000 Max-Q 250W 96GB</th><td>约 ¥71,290/卡</td><td>中国渠道 2026-04 量级（≈$10.8k，按新汇率折算）；社区多数小机箱方案用这个 SKU</td></tr>
-                <tr><th scope="row">DGX Spark 128GB</th><td>约 $6,000 / ¥40,110 每台</td><td>2026-10 报道；4× 约 $24k / ¥16.04 万（欧洲社区价 €4,800/台 → €19.2k / ¥14.21 万）</td></tr>
-                <tr><th scope="row">DGX Spark 64GB</th><td>$4,999 / ¥33,418 每台</td><td>2026-10 起 OEM 版；<strong>内存不够跑本页的 2×/4× Spark 方案</strong></td></tr>
-                <tr><th scope="row">2×96GB 整机</th><td>约 $32k / ¥21.39 万 卡 + 主机</td><td>按 $16k/卡；3× 约 $48k / ¥32.09 万，4× 约 $64k / ¥42.78 万 卡价</td></tr>
-                <tr><th scope="row">4×96GB 整机 BOM</th><td>约 $76.2k / ¥50.94 万</td><td>含 TR PRO 主机、256GB 内存、4TB NVMe；若按中国 4 月 Max-Q 价约 $55.5k / ¥37.1 万</td></tr>
-                <tr><th scope="row">租用对照（非本地）</th><td>$1.48–2.49 / ¥10.66–17.93 每 GPU·小时</td><td>RTX PRO 6000 96GB（Nebius/Hyperstack/RunPod，2026-11）；4 卡 24/7 约 $4,322–7,271/月</td></tr>
+                <tr><td colspan="3"><strong>国内渠道四规格（SMM 实测同名价差达 2.43 倍，不可混用）</strong></td></tr>
+                <tr><th scope="row">RTX PRO 6000 服务器版 96GB</th><td>¥162,500 每卡<small>≈ $24,308</small></td><td>2026-11-10 报价 · <a href="https://news.smm.cn/live/detail/FQSACQIKC6JOVJT743DQCCQWIFCUWIABDR37TQI" target="_blank" rel="noopener noreferrer">SMM上海有色网 ↗</a> · 整机含税现货口径</td></tr>
+                <tr><th scope="row">RTX PRO 6000 工作站版 96GB</th><td>¥135,500 每卡<small>≈ $20,269</small></td><td>2026-09-24 报价 · <a href="https://news.metal.com/newscontent/104134177-smm-analysis-the-same-pro6000-with-channel-quotes-ranging-from-68300-to-166000" target="_blank" rel="noopener noreferrer">SMM上海有色网（9/14-9/22渠道逐条） ↗</a> · 社区方案多用此规格</td></tr>
+                <tr><th scope="row">RTX PRO 6000 Max-Q 96GB</th><td>¥76,899 每卡<small>≈ $11,503</small></td><td>2026-11-13 报价 · <a href="https://detail.zol.com.cn/2157/2156117/price.shtml" target="_blank" rel="noopener noreferrer">ZOL中关村在线 ↗</a> · 小机箱方案常用 SKU</td></tr>
+                <tr><th scope="row">RTX PRO6000D 84GB</th><td>¥69,150 每卡<small>≈ $10,344</small></td><td>2026-09-24 报价 · <a href="https://news.metal.com/newscontent/104134177-smm-analysis-the-same-pro6000-with-channel-quotes-ranging-from-68300-to-166000" target="_blank" rel="noopener noreferrer">SMM上海有色网（9/14-9/22渠道逐条） ↗</a> · 少 12GB 显存，价差 2.37 倍</td></tr>
+                <tr><td colspan="3"><strong>其他市场（非国内渠道，仅作对照）</strong></td></tr>
+                <tr><th scope="row">RTX PRO 6000 96GB（美国零售）</th><td>$18,000 / ¥120,331 每卡<small>2 源均价，区间 $16,000–$20,000</small></td><td>2026-11-13 报价 · <a href="https://gpuperhour.com/blog/nvidia-rtx-pro-6000" target="_blank" rel="noopener noreferrer">GPUPerHour ↗</a> · <a href="https://www.nexus-compute.com/blog/rtx-pro-6000-blackwell-price-availability" target="_blank" rel="noopener noreferrer">Nexus Compute ↗</a> · 官方店价与零售标价差异大</td></tr>
+                <tr><th scope="row">RTX PRO 6000 整机（含卡）</th><td>$13,400 / ¥89,580 每套</td><td>2026-10-29 报价 · <a href="https://news.17173.com/content/10292026/190054775.shtml" target="_blank" rel="noopener noreferrer">17173/快科技 ↗</a>；整机曾低于裸卡</td></tr>
+                <tr><th scope="row">RTX PRO 6000 租用（中位价）</th><td>$1.43 / ¥9.53 每 GPU·小时<small>2 源均价，区间 $0.65–$2.20</small></td><td>2026-11-13 报价 · <a href="https://gpueconomy.com/gpu/rtx-pro-6000?gpus=1&amp;hours=1&amp;basis=job&amp;market=other" target="_blank" rel="noopener noreferrer">GPU Economy（42家供应商中位） ↗</a> · 按需费率，非买断</td></tr>
+                <tr><th scope="row">DGX Spark 128GB</th><td>$6,950 / ¥46,461 每台</td><td>2026-11-13 报价 · <a href="https://physicalailab.io/en/nvidia-dgx-price-spark-station-b300/" target="_blank" rel="noopener noreferrer">Physical AI Lab ↗</a></td></tr>
               </tbody>
             </table>
           </div>
+          <p class="table-note">每项价格来自已记录的带日期报价，<strong>每日 06:00 自动重算</strong>，并直接链接到原始来源；同日多来源时显示均价与区间。未采集到的项目显示「待采集」，<strong>不沿用旧值</strong>。国内「PRO6000」同名下含服务器版 / 工作站版 / Max-Q / 84G 四种规格，渠道报价区间 ¥68,300–166,000，混用会导致预算错估数倍。</p>
+<!-- HARDWARE-PRICES:END -->
           <p class="table-note">显卡价格是本页最不稳定的数字：同一张卡在 2025 年首发、2026 年初和 2026 年 8 月能差一倍以上；社区还发现「买整机比买裸卡便宜」的倒挂。采购前务必重新询价。</p>
         </section>
 
