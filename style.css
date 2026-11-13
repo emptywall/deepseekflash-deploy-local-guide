@@ -416,3 +416,22 @@ footer > div:first-child p { margin: 6px 0 0; font-size: 11px; color: var(--fain
 .version-table { min-width: 580px; }
 .pick-table { min-width: 640px; }
 .quality-panel .compact-table { min-width: 680px; }
+
+/* ===== 硬件价格变化表（由 check_prices.py 生成，勿手改区块内容） ===== */
+#price-changes .up,
+#price-changes .down,
+#price-changes .flat {
+  display: inline-block;
+  padding: 1px 7px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+/* 涨价对企业成本是坏消息，用红；降价用绿。语义色，不随主题反转。 */
+#price-changes .up { color: #b42318; background: #fee4e2; }
+#price-changes .down { color: #067647; background: #dcfae6; }
+#price-changes .flat { color: #667085; background: #f2f4f7; }
+#price-changes td small { display: block; color: var(--faint); font-size: 11px; font-weight: 500; margin-top: 2px; }
+#price-changes table td { font-variant-numeric: tabular-nums; }

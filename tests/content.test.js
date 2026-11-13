@@ -53,6 +53,16 @@ test('the setup table has tiered rows and each names a real source', () => {
   }
 });
 
+test('the page carries a generated price-change table', () => {
+  // 该区块由 deploy/check_prices.py 生成；测试只保证它存在且结构可解析，
+  // 不锁死具体价格（价格每天可能变）。
+  const block = html.match(/<!-- PRICE-CHANGES:BEGIN[\s\S]*?<!-- PRICE-CHANGES:END -->/);
+  assert.ok(block, 'generated price-change block is missing');
+  assert.match(block[0], /id="price-changes"/);
+  assert.match(block[0], /硬件价格变化/);
+  assert.match(block[0], /<tbody>/);
+});
+
 test('the page documents official weight precision and includes Apple Silicon routes', () => {
   // 官方权重本身是 FP8，本页必须讲清楚，否则「原精度部署」会被误读。
   assert.match(html, /FP8/);
