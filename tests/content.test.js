@@ -86,35 +86,31 @@ test('the page describes its real update mechanism, not a static snapshot', () =
   assert.match(html, /非 DeepSeek 官方页面/);
 });
 
-test('the page carries a generated two-day price table', () => {
-  // 该区块由 deploy/check_prices.py 生成；测试只保证它存在且结构可解析，
-  // 不锁死具体价格（价格每天可能变）。
-  const block = html.match(/<!-- PRICE-CHANGES:BEGIN[\s\S]*?<!-- PRICE-CHANGES:END -->/);
-  assert.ok(block, 'generated price block is missing');
-  assert.match(block[0], /id="price-changes"/);
+test('the page carries one generated hardware-price table', () => {
+  // 硬件参考表与两日对比表已合并为单一表格（deploy/render_prices.py 生成）。
+  const block = html.match(/<!-- HARDWARE-PRICES:BEGIN[\s\S]*?<!-- HARDWARE-PRICES:END -->/);
+  assert.ok(block, 'generated hardware price block is missing');
   assert.match(block[0], /昨天 vs 今天/);
   assert.match(block[0], /昨天均价/);
   assert.match(block[0], /今天均价/);
+  assert.match(block[0], /近 7 日均价/);
   assert.match(block[0], /<tbody>/);
-  // 必须标注方法与局限，否则「均价」会被误读成全网成交价。
-  assert.match(block[0], /算术平均/);
-  assert.match(block[0], /无采样/);
+  // 旧的第二张价格表不应再出现，否则同一批 SKU 会被重复展示。
+  assert.ok(!html.includes('PRICE-CHANGES:BEGIN'), 'the old separate price table still exists');
+  assert.ok(!html.includes('id="price-changes"'), 'the old two-day block still exists');
 });
 
-test('the two-day table never fabricates a missing day', () => {
+test('the hardware table never fabricates a missing day', () => {
   // 未采集到的日期必须显式写「无采样」，不得用插值或复制昨天的数字冒充。
-  const block = html.match(/<!-- PRICE-CHANGES:BEGIN[\s\S]*?<!-- PRICE-CHANGES:END -->/);
+  const block = html.match(/<!-- HARDWARE-PRICES:BEGIN[\s\S]*?<!-- HARDWARE-PRICES:END -->/);
   assert.ok(block);
-  // 每行都要说明样本来源数量
   const rows = block[0].match(/<tr><th scope="row">[\s\S]*?<\/tr>/g) || [];
-  assert.ok(rows.length >= 1, 'expected at least one priced row');
+  assert.ok(rows.length >= 5, 'expected the priced hardware rows');
   for (const row of rows) {
-    // 行内必须能追溯到报价：昨/今几个来源、最近两次对比日期、或长窗口的来源日期。
-    assert.match(
-      row,
-      /昨 \d+ 源|今 \d+ 源|对比 20\d\d-|近\d+日 \d+ 源/,
-      'each row states its sample provenance',
-    );
+    // 每行都要能追溯到来源链接或明确标注无采样。
+    assert.match(row, /href="https:\/\/|无采样|待采集/, 'each row cites a source or states no sample');
+    // 6 列结构：硬件 / 昨天 / 今天 / 近7日 / 变化 / 来源
+    assert.equal((row.match(/<t[dh][\s>]/g) || []).length, 6, 'each row keeps the merged six-column shape');
   }
 });
 
