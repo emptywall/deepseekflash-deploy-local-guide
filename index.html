@@ -493,16 +493,17 @@
           <div class="table-scroll">
             <table class="data-table">
               <caption class="visually-hidden">硬件价格两日均价对比</caption>
-              <thead><tr><th scope="col">硬件</th><th scope="col">昨天均价</th><th scope="col">今天均价</th><th scope="col">变化</th><th scope="col">样本</th></tr></thead>
+              <thead><tr><th scope="col">硬件</th><th scope="col">昨天均价</th><th scope="col">今天均价</th><th scope="col">近 7 日均价</th><th scope="col">变化</th><th scope="col">样本</th></tr></thead>
               <tbody>
-                <tr><th scope="row">RTX PRO 6000 服务器版 96GB（国内）<small>每卡</small></th><td><span class="flat">无采样</span></td><td><span class="flat">无采样</span></td><td><span class="down">▼ -2.7%</span></td><td>—<small>对比 2026-11-06 ¥167,000 → 2026-11-10 ¥162,500</small></td></tr>
-                <tr><th scope="row">RTX PRO 6000 Max-Q 96GB（国内）<small>每卡</small></th><td>¥76,899</td><td><span class="flat">无采样</span></td><td><span class="flat">—</span></td><td>昨 1 源<small>对比 2026-11-11 ¥76,899 → 2026-11-12 ¥76,899</small></td></tr>
-                <tr><th scope="row">RTX PRO 6000 96GB（美国）<small>每卡</small></th><td><span class="flat">无采样</span></td><td>$18,000 / ¥120,331</td><td><span class="flat">—</span></td><td>今 2 源<small>今区间 $16,000 / ¥106,961–$20,000 / ¥133,701</small></td></tr>
-                <tr><th scope="row">DGX Spark 128GB<small>每台</small></th><td><span class="flat">无采样</span></td><td>$6,950 / ¥46,461</td><td><span class="flat">—</span></td><td>今 1 源</td></tr>
+                <tr><th scope="row">RTX PRO 6000 服务器版 96GB（国内）<small>每卡</small></th><td><span class="flat">无采样</span></td><td><span class="flat">无采样</span></td><td>¥162,500<small>1 样本 / 1 天</small></td><td><span class="down">▼ -2.7%</span></td><td>—<small>对比 2026-11-06 ¥167,000 → 2026-11-10 ¥162,500</small></td></tr>
+                <tr><th scope="row">RTX PRO 6000 Max-Q 96GB（国内）<small>每卡</small></th><td>¥76,899</td><td><span class="flat">无采样</span></td><td>¥76,899<small>2 样本 / 2 天</small></td><td><span class="flat">—</span></td><td>昨 1 源<small>对比 2026-11-11 ¥76,899 → 2026-11-12 ¥76,899</small></td></tr>
+                <tr><th scope="row">RTX PRO 6000 96GB（美国）<small>每卡</small></th><td><span class="flat">无采样</span></td><td>$18,000 / ¥120,331</td><td>$18,000 / ¥120,331<small>2 样本 / 1 天</small></td><td><span class="flat">—</span></td><td>今 2 源<small>今区间 $16,000 / ¥106,961–$20,000 / ¥133,701</small></td></tr>
+                <tr><th scope="row">RTX PRO 6000 整机（含卡）<small>每套</small></th><td><span class="flat">无采样</span></td><td><span class="flat">无采样</span></td><td>$13,400 / ¥89,580<small>近 30 日均价（1 样本 / 1 天）</small></td><td><span class="flat">—</span></td><td>近30日 1 源（2026-10-29）<small>对照裸卡 $16,000：整机更便宜 16%（$13,400 / ¥89,580 vs $16,000）</small></td></tr>
+                <tr><th scope="row">DGX Spark 128GB<small>每台</small></th><td><span class="flat">无采样</span></td><td>$6,950 / ¥46,461</td><td>$6,950 / ¥46,461<small>1 样本 / 1 天</small></td><td><span class="flat">—</span></td><td>今 1 源</td></tr>
               </tbody>
             </table>
           </div>
-          <p class="table-note">均价＝当日采集到的公开报价算术平均，每行标注样本数与区间。<strong>未采集到的日期显示「无采样」，不做插值或推算。</strong>零售、渠道现货与批发报价差异可达 10–30%，样本少时仅代表已见报价，不等同全网成交价。</p>
+          <p class="table-note">均价＝已采集到的公开报价算术平均，每行标注样本数与区间。<strong>未采集到的日期显示「无采样」，不做插值或推算。</strong>「近 7 日均价」覆盖最近 7 天样本，用于两天内无报价的硬件；按周/按月才有一条报价的（整机、二手 Mac）改用近 30 日均价并单独标注。零售、渠道现货与批发报价差异可达 10–30%，样本少时仅代表已见报价，不等同全网成交价。</p>
         </section>
 <!-- PRICE-CHANGES:END -->
 

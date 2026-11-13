@@ -96,7 +96,12 @@ test('the two-day table never fabricates a missing day', () => {
   const rows = block[0].match(/<tr><th scope="row">[\s\S]*?<\/tr>/g) || [];
   assert.ok(rows.length >= 1, 'expected at least one priced row');
   for (const row of rows) {
-    assert.match(row, /昨 \d+ 源|今 \d+ 源|对比 20\d\d-/, 'each row states its sample provenance');
+    // 行内必须能追溯到报价：昨/今几个来源、最近两次对比日期、或长窗口的来源日期。
+    assert.match(
+      row,
+      /昨 \d+ 源|今 \d+ 源|对比 20\d\d-|近\d+日 \d+ 源/,
+      'each row states its sample provenance',
+    );
   }
 });
 
