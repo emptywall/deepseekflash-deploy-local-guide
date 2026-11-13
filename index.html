@@ -127,17 +127,6 @@
       </div>
       <div class="callout"><div class="callout-icon">✓</div><div><strong>1017 权重大小：510,296,708,312 B（510.30 GB）。</strong><p>共 48 个 safetensors 分片；量化包和运行时额外内存需求因方案而异。具体配置请查看社区方案及原始来源。</p></div></div>
 
-      <section class="panel">
-        <div class="panel-header"><div><span class="mini-icon">◈</span><strong>官方权重是原精度还是量化？</strong></div><span class="muted-label">先说结论</span></div>
-        <ul class="about-list">
-          <li><strong>官方 1017 权重本身就是 FP8 量化的，不是 BF16 原精度。</strong>按 HF API 的 dtype 统计：<code>I8</code> 占 73.0%、<code>F8_E4M3</code> 占 26.7%，<code>BF16</code> 仅 0.3%（<code>F32</code> 为少量标量）。仓库 <code>quantization_config.quant_method = fp8</code>。</li>
-          <li><strong>所以「原精度部署」在这套权重上不成立。</strong>社区说的「原生 / 官方权重」指的是 <em>直接用官方 FP8 发布权重、不再二次量化</em>，而不是 BF16 全精度。本页 4×96GB SGLang 行、4×DGX Spark SGLang 行属于这一类。</li>
-          <li><strong>页面上 10 组方案几乎全部又做了一次再量化。</strong>常见做法：EXL3 2.25–3.5 bpw、FP8/MXFP4、oQ4e 4-bit、GGUF IQ/Q 系列。位宽越低越省显存，但精度损失需要自行评估——有来源指出 CSF 量化包在 Spark 上慢 5–20%，也有报告称 iQ-MLX 在旧 Mac 上更快但精度略降。</li>
-          <li><strong>想要更高精度只有两条路：</strong>① 用官方 FP8 权重原样起（显存需求约 510GB，即 4×96GB 起步）；② 用社区 BF16 上采或 FP32/FP64 oracle 重算（TensorFold 有对应 PR），但那是校验用途，不是常规部署路径。</li>
-          <li><strong>苹果方案全部是 4-bit。</strong>MLX 生态目前跑 1017 只有 oQ4e 4-bit（约 432GB）等量化包，没有 FP8 原样路径——统一内存带宽和容量都撑不住，见下表 Apple Silicon 两行。</li>
-        </ul>
-      </section>
-
       <section class="panel migrate-panel">
         <div class="panel-header"><div><span class="mini-icon mint">◷</span><strong>部署 1017 的注意点</strong></div><span class="muted-label">社区汇总</span></div>
         <ul class="about-list">

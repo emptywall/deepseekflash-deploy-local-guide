@@ -83,16 +83,18 @@ test('the page carries a generated price-change table', () => {
   assert.match(block[0], /<tbody>/);
 });
 
-test('the page documents official weight precision and includes Apple Silicon routes', () => {
-  // 官方权重本身是 FP8，本页必须讲清楚，否则「原精度部署」会被误读。
-  assert.match(html, /FP8/);
-  assert.match(html, /I8/);
-  assert.match(html, /F8_E4M3/);
-  assert.match(html, /quant_method/);
-  // 苹果方案至少要有 MLX 量化包与双机实测链接。
+test('the page includes Apple Silicon routes', () => {
+  // 「官方权重是原精度还是量化」栏目已按 boss 要求移除，不再断言其内容；
+  // 这里只保留苹果方案的存在性检查。
   assert.match(html, /Apple Silicon/);
   assert.match(html, /mlx/i);
   assert.match(html, /Thunderbolt 5/);
+});
+
+test('the removed weight-precision panel stays removed', () => {
+  // 防止以后有人「顺手加回来」：该栏目是按明确要求删掉的。
+  assert.doesNotMatch(html, /官方权重是原精度还是量化/);
+  assert.doesNotMatch(html, /quant_method/);
 });
 
 test('filter chips cover every hardware tier used by the table', () => {
