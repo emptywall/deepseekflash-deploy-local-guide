@@ -341,7 +341,7 @@ code { font-family: var(--mono); font-size: .92em; background: var(--line-soft);
 .about-list li strong { color: var(--ink); }
 
 footer {
-  display: flex; justify-content: space-between; gap: 40px;
+  display: flex; flex-wrap: wrap; justify-content: space-between; gap: 40px;
   margin-top: 36px; padding: 26px 4px 0;
   border-top: 1px solid var(--line);
 }
@@ -502,3 +502,23 @@ footer > div:first-child p { margin: 6px 0 0; font-size: 11px; color: var(--fain
 .picks li.pick-cheapest { border-left-color: #12b76a; }
 .picks li.pick-fastest  { border-left-color: #f04438; }
 .picks li.pick-value    { border-left-color: #7c5cff; }
+
+/* ===== 页脚「更新机制」说明：通栏全宽，不与右对齐的来源链接混排 ===== */
+/* footer 是 flex（justify-content: space-between），不是 grid，
+   所以用 flex-basis: 100% 换行占满整行，grid-column 在这里不起作用。 */
+.footer-notes {
+  flex-basis: 100%;
+  margin-top: 18px;
+  padding-top: 14px;
+  border-top: 1px solid var(--line);
+  text-align: left;
+  max-width: 900px;
+}
+.footer-notes p {
+  margin: 0 0 7px;
+  font-size: 11px;
+  line-height: 1.85;
+  color: #8a95ab;
+}
+.footer-notes p:last-child { margin-bottom: 0; }
+.footer-notes strong { color: #6b7789; }

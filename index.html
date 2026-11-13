@@ -41,7 +41,7 @@
     <header class="topbar">
       <div class="breadcrumb">工作台 <span>/</span> 社区本地部署</div>
       <div class="top-right">
-        <span class="static-pill"><b></b> 静态资料快照 · 2026-11-13</span>
+        <span class="static-pill"><b></b> 每日自动核对 · 最近 2026-11-13</span>
         <a href="#sources" aria-label="查看数据来源">来源 <span>↗</span></a>
       </div>
     </header>
@@ -527,7 +527,7 @@
       <footer id="sources">
         <div>
           <strong>LOCAL / DEPLOY</strong>
-          <p>独立社区信息整理 · 非 DeepSeek 官方页面 · 静态快照，不自动更新</p>
+          <p>独立社区信息整理 · 非 DeepSeek 官方页面 · 每日自动核对，非实时行情</p>
         </div>
         <div class="footer-sources">
           <span>主要来源：</span>
@@ -544,7 +544,11 @@
           <a href="https://www.nexus-compute.com/blog/dgx-station-gb300-vs-dgx-spark" target="_blank" rel="noopener noreferrer">DGX 价格参考 ↗</a>
           <a href="https://m.ithome.com/html/988947.htm" target="_blank" rel="noopener noreferrer">RTX PRO 6000 涨价 ↗</a>
           <a href="https://news.17173.com/content/10292026/190054775.shtml" target="_blank" rel="noopener noreferrer">显卡/整机价格倒挂 ↗</a>
-          <p>资料核对于 <strong>2026-11-13</strong>（上一版为 2026-11-06）。本次复核：权重清单与 HF 一致（48 分片 / 510,296,708,312 B，仓库 lastModified 2026-11-10）；汇率由 ¥7.20 更新为 ¥6.69（实测 2026-11-13）；来源链接修复 2 处（社区日报分支 404、TP3 仓库改名）。权重与来源以原始页面为准；页面为手动整理，不提供实时行情或部署服务。</p>
+        </div>
+        <div class="footer-notes">
+          <p><strong>更新机制：</strong>本页每天 06:00（Asia/Shanghai）自动执行一次核对——抓取汇率、采集带日期的硬件报价、重算人民币金额、检测失效来源链接、并部署更新。因此价格与汇率不是静态快照。</p>
+          <p><strong>但并非全部自动：</strong>各方案的吞吐与显存数据来自社区发布者自报，由人工整理录入，不会自动复测；自动化只负责价格、汇率、链接与去重校验。最近一次人工复核为 <strong>2026-11-13</strong>（上一版 2026-11-06）：权重清单与 HF 一致（48 分片 / 510,296,708,312 B，仓库 lastModified 2026-11-10）；汇率由 ¥7.20 更新为 ¥6.69；修复失效来源 2 处（社区日报分支 404、TP3 仓库改名）。</p>
+          <p>权重与性能仍以原始来源为准。本页提供参考与估算，<strong>不构成实时行情、报价或部署服务</strong>；采购前请按来源页面重新询价。</p>
         </div>
       </footer>
     </div>

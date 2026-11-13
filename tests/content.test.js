@@ -73,6 +73,19 @@ test('the hero names the cheapest, fastest and best-value plans with sources', (
   for (const link of links) assert.match(link, /^href="https:\/\//);
 });
 
+test('the page describes its real update mechanism, not a static snapshot', () => {
+  // 页面每天自动更新，所以「静态快照，不自动更新」是错误的自我描述。
+  assert.doesNotMatch(html, /静态快照，不自动更新/);
+  assert.doesNotMatch(html, /静态资料快照/);
+  // 必须说明自动更新的内容与频率。
+  assert.match(html, /每天 06:00/);
+  assert.match(html, /自动执行一次核对/);
+  // 也必须说明哪些不是自动的，避免读者把自报数据当成复测结果。
+  assert.match(html, /并非全部自动|不会自动复测/);
+  // 非官方立场声明要保留。
+  assert.match(html, /非 DeepSeek 官方页面/);
+});
+
 test('the page carries a generated two-day price table', () => {
   // 该区块由 deploy/check_prices.py 生成；测试只保证它存在且结构可解析，
   // 不锁死具体价格（价格每天可能变）。
