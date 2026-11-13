@@ -93,7 +93,6 @@ test('the page carries one generated hardware-price table', () => {
   assert.match(block[0], /昨天 vs 今天/);
   assert.match(block[0], /昨天均价/);
   assert.match(block[0], /今天均价/);
-  assert.match(block[0], /近 7 日均价/);
   assert.match(block[0], /<tbody>/);
   // 旧的第二张价格表不应再出现，否则同一批 SKU 会被重复展示。
   assert.ok(!html.includes('PRICE-CHANGES:BEGIN'), 'the old separate price table still exists');
@@ -109,8 +108,8 @@ test('the hardware table never fabricates a missing day', () => {
   for (const row of rows) {
     // 每行都要能追溯到来源链接或明确标注无采样。
     assert.match(row, /href="https:\/\/|无采样|待采集/, 'each row cites a source or states no sample');
-    // 6 列结构：硬件 / 昨天 / 今天 / 近7日 / 变化 / 来源
-    assert.equal((row.match(/<t[dh][\s>]/g) || []).length, 6, 'each row keeps the merged six-column shape');
+    // 5 列结构：硬件 / 昨天 / 今天 / 变化 / 来源
+    assert.equal((row.match(/<t[dh][\s>]/g) || []).length, 5, 'each row keeps the merged five-column shape');
   }
 });
 
