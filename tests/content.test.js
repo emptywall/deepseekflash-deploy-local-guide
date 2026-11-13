@@ -73,14 +73,31 @@ test('the hero names the cheapest, fastest and best-value plans with sources', (
   for (const link of links) assert.match(link, /^href="https:\/\//);
 });
 
-test('the page carries a generated price-change table', () => {
+test('the page carries a generated two-day price table', () => {
   // 该区块由 deploy/check_prices.py 生成；测试只保证它存在且结构可解析，
   // 不锁死具体价格（价格每天可能变）。
   const block = html.match(/<!-- PRICE-CHANGES:BEGIN[\s\S]*?<!-- PRICE-CHANGES:END -->/);
-  assert.ok(block, 'generated price-change block is missing');
+  assert.ok(block, 'generated price block is missing');
   assert.match(block[0], /id="price-changes"/);
-  assert.match(block[0], /硬件价格变化/);
+  assert.match(block[0], /昨天 vs 今天/);
+  assert.match(block[0], /昨天均价/);
+  assert.match(block[0], /今天均价/);
   assert.match(block[0], /<tbody>/);
+  // 必须标注方法与局限，否则「均价」会被误读成全网成交价。
+  assert.match(block[0], /算术平均/);
+  assert.match(block[0], /无采样/);
+});
+
+test('the two-day table never fabricates a missing day', () => {
+  // 未采集到的日期必须显式写「无采样」，不得用插值或复制昨天的数字冒充。
+  const block = html.match(/<!-- PRICE-CHANGES:BEGIN[\s\S]*?<!-- PRICE-CHANGES:END -->/);
+  assert.ok(block);
+  // 每行都要说明样本来源数量
+  const rows = block[0].match(/<tr><th scope="row">[\s\S]*?<\/tr>/g) || [];
+  assert.ok(rows.length >= 1, 'expected at least one priced row');
+  for (const row of rows) {
+    assert.match(row, /昨 \d+ 源|今 \d+ 源|对比 20\d\d-/, 'each row states its sample provenance');
+  }
 });
 
 test('the page includes Apple Silicon routes', () => {
