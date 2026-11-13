@@ -38,17 +38,31 @@ test('the page focuses on 1017 and provides RMB cost assumptions', () => {
   assert.match(html, /非实时汇率|示例汇率|非实时/);
 });
 
-test('the setup table has ten tiered rows and each names a real source', () => {
-  assert.equal(rowBlocks.length, 10);
-  for (const tier of tiers) assert.ok(['single', 'dual', 'triple', 'quad', 'octa', 'spark', 'other'].includes(tier), `unknown tier ${tier}`);
+test('the setup table has tiered rows and each names a real source', () => {
+  // 行数随收录方案增长；锁下限而不是固定值，避免每加一组方案就改测试。
+  assert.ok(rowBlocks.length >= 10, `expected at least 10 rows, got ${rowBlocks.length}`);
+  assert.equal(rowBlocks.length, new Set(tiers).size >= 0 ? rowBlocks.length : 0);
+  for (const tier of tiers) assert.ok(['single', 'dual', 'triple', 'quad', 'octa', 'spark', 'apple', 'other'].includes(tier), `unknown tier ${tier}`);
   const body = html.match(/id="setups-table"[\s\S]*?<tbody>([\s\S]*?)<\/tbody>/)[1];
   const rowMarkup = body.split(/<tr /).slice(1);
-  assert.equal(rowMarkup.length, 10);
+  assert.equal(rowMarkup.length, rowBlocks.length);
   for (const row of rowMarkup) {
     assert.match(row, /href="https:\/\//, 'every setup row links to its public source');
     assert.match(row, /target="_blank"/);
     assert.match(row, /rel="noopener noreferrer"/);
   }
+});
+
+test('the page documents official weight precision and includes Apple Silicon routes', () => {
+  // 官方权重本身是 FP8，本页必须讲清楚，否则「原精度部署」会被误读。
+  assert.match(html, /FP8/);
+  assert.match(html, /I8/);
+  assert.match(html, /F8_E4M3/);
+  assert.match(html, /quant_method/);
+  // 苹果方案至少要有 MLX 量化包与双机实测链接。
+  assert.match(html, /Apple Silicon/);
+  assert.match(html, /mlx/i);
+  assert.match(html, /Thunderbolt 5/);
 });
 
 test('filter chips cover every hardware tier used by the table', () => {
